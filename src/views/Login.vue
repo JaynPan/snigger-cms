@@ -9,6 +9,8 @@ import { Options, Vue } from 'vue-class-component';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'vue-router';
 
+import { adminUserUid } from '@/config/private';
+
 @Options({
   components: {},
 })
@@ -27,14 +29,14 @@ export default class Login extends Vue {
 
         if (!credential) return;
 
-        const token = credential.accessToken;
-
-        console.log(token);
-        // The signed-in user info.
+        // const token = credential.accessToken;
         const { user } = result;
 
-        console.log(user);
-        this.router.push('/');
+        if (user && user.uid === adminUserUid) {
+          this.router.push('/');
+        } else {
+          alert('your are not admin user');
+        }
       }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;

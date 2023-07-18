@@ -3,6 +3,8 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import Login from '@/views/Login.vue';
 import Dashboard from '@/views/Dashboard.vue';
+import PageNotFound from '@/views/PageNotFound.vue';
+import { adminUserUid } from '@/config/private';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,6 +20,7 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
     },
   },
+  { path: '/:catchAll(.*)', component: PageNotFound },
 ];
 
 const router = createRouter({
@@ -25,27 +28,36 @@ const router = createRouter({
   routes,
 });
 
-const getCurrentUser = async () => new Promise((resolve, reject) => {
+const checkIsAdminUser = async () => new Promise((resolve) => {
   const removeListener = onAuthStateChanged(getAuth(), (user) => {
-    if (user) {
+    if (user && user.uid === adminUserUid) {
       removeListener();
-      resolve(user);
+      resolve(true);
     } else {
-      reject();
+      resolve(false);
     }
   });
 });
 
 router.beforeEach(async (to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (await getCurrentUser()) {
-      next();
-    } else {
-      next('/login');
-    }
-  } else {
-    next();
+  const isNavToAuthRoute = to.matched.some((record) => record.meta.requiresAuth);
+  const toLoginRoute = to.matched.some((record) => record.path === '/login');
+  const isAdminUser = await checkIsAdminUser();
+
+  if (isAdminUser && toLoginRoute) {
+    // prevent user navigate to login without sign out
+    next(from);
+    return;
   }
+
+  if (isNavToAuthRoute) {
+    if (isAdminUser) next();
+    else next('/login');
+
+    return;
+  }
+
+  next();
 });
 
 export default router;
