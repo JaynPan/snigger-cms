@@ -4,6 +4,8 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Login from '@/views/Login.vue';
 import Dashboard from '@/views/Dashboard.vue';
 import PageNotFound from '@/views/PageNotFound.vue';
+import Uploader from '@/views/Uploader.vue';
+
 import { adminUserUid } from '@/config/private';
 
 const routes: Array<RouteRecordRaw> = [
@@ -16,6 +18,14 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'dashboard',
     component: Dashboard,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/uploader',
+    name: 'uploader',
+    component: Uploader,
     meta: {
       requiresAuth: true,
     },

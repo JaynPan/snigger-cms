@@ -14,7 +14,6 @@ import { adminUserUid } from '@/config/private';
 @Options({
   components: {},
 })
-
 export default class Login extends Vue {
   private router = useRouter();
 
