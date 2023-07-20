@@ -9,11 +9,12 @@ import * as directives from 'vuetify/directives';
 // eslint-disable-next-line import/extensions
 import 'vuetify/styles';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
-// import '@fortawesome/fontawesome-free/css/all.css';
 import { fa } from 'vuetify/iconsets/fa';
 import { aliases, mdi } from 'vuetify/iconsets/mdi';
-import '@mdi/font/css/materialdesignicons.css'; // Ensure you are using css-loader
-import '@fortawesome/fontawesome-free/css/all.css'; // Ensure your project is capable of handling css files
+import '@mdi/font/css/materialdesignicons.css';
+import '@fortawesome/fontawesome-free/css/all.css';
+import ToastPlugin from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-bootstrap.css';
 
 import App from './App.vue';
 import router from './router';
@@ -35,4 +36,5 @@ const vuetify = createVuetify({
 });
 
 getAuth(app);
-createApp(App).use(router).use(vuetify).mount('#app');
+createApp(App).use(router).use(vuetify).use(ToastPlugin)
+  .mount('#app');
