@@ -21,6 +21,7 @@ import router from './router';
 import firebaseConfig from './config/firebaseConfig';
 
 const app = initializeApp(firebaseConfig);
+console.log(process.env.VUE_APP_FIRBASE_API_KEY);
 
 const vuetify = createVuetify({
   components,
