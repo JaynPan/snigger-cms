@@ -4,14 +4,15 @@
       <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
       <v-app-bar
-        color="primary"
         prominent
       >
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-toolbar-title>Snigger</v-toolbar-title>
-
         <v-spacer></v-spacer>
+
+        <v-toolbar-title>
+          <img src="../assets//logo.png" alt="Snigger" class="logo" style="width:40px" />
+        </v-toolbar-title>
       </v-app-bar>
 
       <v-navigation-drawer

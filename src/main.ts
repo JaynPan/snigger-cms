@@ -33,6 +33,9 @@ const vuetify = createVuetify({
       fa,
     },
   },
+  theme: {
+    defaultTheme: 'dark',
+  },
 });
 
 getAuth(app);

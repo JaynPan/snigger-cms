@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <button @click="googleLogin">google login</button>
+  <div class="container">
+    <img src="../assets//logo.png" alt="Snigger" class="logo" />
+    <div>
+      <v-btn @click="googleLogin" color="primary" vai>Google Login</v-btn>
+    </div>
   </div>
 </template>
 
@@ -48,3 +51,16 @@ export default class Login extends Vue {
   }
 }
 </script>
+
+<style>
+.container {
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.logo {
+  width: 100px;
+}
+</style>
