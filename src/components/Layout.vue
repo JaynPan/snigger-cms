@@ -10,9 +10,11 @@
 
         <v-spacer></v-spacer>
 
-        <v-toolbar-title>
-          <img src="../assets//logo.png" alt="Snigger" class="logo" style="width:40px" />
+        <v-toolbar-title style="display:flex; justify-content:center;">
+          <img src="../assets//logo.png" alt="Snigger" class="logo" style="width:40px;" />
         </v-toolbar-title>
+
+        <v-spacer></v-spacer>
       </v-app-bar>
 
       <v-navigation-drawer
