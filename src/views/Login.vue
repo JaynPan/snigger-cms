@@ -11,6 +11,7 @@
 import { Options, Vue } from 'vue-class-component';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'vue-router';
+import { useToast } from 'vue-toast-notification';
 
 import { adminUserUid } from '@/config/private';
 
@@ -19,6 +20,8 @@ import { adminUserUid } from '@/config/private';
 })
 export default class Login extends Vue {
   private router = useRouter();
+
+  private toast = useToast();
 
   googleLogin() {
     const auth = getAuth();
@@ -35,9 +38,9 @@ export default class Login extends Vue {
         const { user } = result;
 
         if (user && user.uid === adminUserUid) {
-          this.router.push('/');
+          this.router.push('/uploader');
         } else {
-          alert('your are not admin user');
+          this.toast.error('your are not admin user');
         }
       }).catch((error) => {
         // Handle Errors here.
@@ -52,13 +55,15 @@ export default class Login extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   position: absolute;
   top: 50%;
   left:50%;
   transform: translate(-50%, -50%);
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .logo {
   width: 100px;
