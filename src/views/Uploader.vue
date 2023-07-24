@@ -13,14 +13,16 @@
 </template>
 
 <script lang="ts" setup>
-import Layout from '@/components/Layout.vue';
 import { ref } from 'vue';
 import { useToast } from 'vue-toast-notification';
+
+import Layout from '@/components/Layout.vue';
+import { API_BASE_URL } from '@/config/private';
 
 const $toast = useToast();
 const selectedFile = ref<any>(undefined);
 const loading = ref(false);
-const API_URL = 'https://us-central1-giggle-ff996.cloudfunctions.net/app/api/meme';
+const API_URL = `${API_BASE_URL}/api/meme`;
 
 async function uploadImage() {
   if (selectedFile.value && !selectedFile.value[0]) {

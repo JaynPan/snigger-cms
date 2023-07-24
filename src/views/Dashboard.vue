@@ -4,7 +4,10 @@
     <main class="container">
         <div v-for="(image, index) in images" :key="index" class="image-container">
           <img :src="image.url" :alt="image.filePath" />
-          <p>{{ image.filePath }}</p>
+          <p>Document ID:</p>
+          <b>{{ image.documentId }}</b>
+          <p>Image File Path:</p>
+          <b>{{ image.filePath }}</b>
         </div>
     </main>
   </Layout>
@@ -15,12 +18,13 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 import Layout from '@/components/Layout.vue';
+import { API_BASE_URL } from '@/config/private';
 
 const images = ref<{url: string; filePath: string; documentId: string}[]>([]);
 
 const fetchMemeList = async () => {
   try {
-    const response = await axios.get('https://us-central1-giggle-ff996.cloudfunctions.net/app/api/memeList');
+    const response = await axios.get(`${API_BASE_URL}/api/memeList`);
     images.value = response.data;
   } catch (error) {
     console.error('Error fetching meme list:', error);

@@ -57,7 +57,7 @@
         </v-list>
       </v-navigation-drawer>
 
-      <main style="min-height: 100vh;margin:64px 32px 32px 32px;">
+      <main style="min-height: 100vh;margin:64px 32px 32px 32px;width:100%">
         <slot></slot>
       </main>
     </v-layout>
