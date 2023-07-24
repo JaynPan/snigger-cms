@@ -16,6 +16,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'class-methods-use-this': 'off',
     'vue/multi-word-component-names': 'off',
+    'max-len': ['error', { code: 120 }],
   },
   overrides: [
     {
