@@ -17,15 +17,14 @@ import { ref } from 'vue';
 import { useToast } from 'vue-toast-notification';
 
 import Layout from '@/components/Layout.vue';
-import { API_BASE_URL } from '@/config/private';
+import axiosInstance from '@/config/axios';
 
 const $toast = useToast();
 const selectedFile = ref<any>(undefined);
 const loading = ref(false);
-const API_URL = `${API_BASE_URL}/api/meme`;
 
 async function uploadImage() {
-  if (selectedFile.value && !selectedFile.value[0]) {
+  if (!selectedFile.value || !selectedFile.value[0]) {
     $toast.error('no image selected!', {
       position: 'top-right',
     });
@@ -38,14 +37,7 @@ async function uploadImage() {
 
   try {
     loading.value = true;
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error('Image upload failed.');
-    }
+    await axiosInstance.post('/api/meme', formData);
 
     $toast.success('Upload Successfully!', {
       position: 'top-right',

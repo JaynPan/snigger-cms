@@ -28,11 +28,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import axios from 'axios';
 import { useToast } from 'vue-toast-notification';
 
 import Layout from '@/components/Layout.vue';
-import { API_BASE_URL } from '@/config/private';
+import axiosInstance from '@/config/axios';
 
 const images = ref<{url: string; filePath: string; documentId: string}[]>([]);
 const isLoading = ref(false);
@@ -42,7 +41,7 @@ const fetchMemeList = async () => {
   try {
     isLoading.value = true;
 
-    const response = await axios.get(`${API_BASE_URL}/api/memeList`);
+    const response = await axiosInstance.get('/api/memeList');
     images.value = response.data;
   } catch (error) {
     console.error('Error fetching meme list:', error);
@@ -55,7 +54,7 @@ const deletePhoto = async ({ documentId, filePath }: {documentId: string; filePa
   try {
     isLoading.value = true;
 
-    const response = await axios.delete(`${API_BASE_URL}/api/meme`, {
+    const response = await axiosInstance.delete('/api/meme', {
       params: { documentId, filePath },
     });
 
