@@ -1,5 +1,8 @@
 # snigger-cms
 
+<img width="1916" alt="image" src="https://github.com/JaynPan/snigger-cms/assets/40001097/d4066b0a-562b-430d-b82d-6273e0372037">
+
+
 ## Project setup
 ```
 npm install
