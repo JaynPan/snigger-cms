@@ -1,7 +1,9 @@
 # snigger-cms
 
+https://mellow-tulumba-4a1a39.netlify.app
+
 A CMS for [Snigger](https://apps.apple.com/tw/app/snigger/id6451387892)
-Stack: VueJS, Vuetify, Firebase, vue-router
+Stack: VueJS, Vuetify, Firebase, vue-router, Netlify
 
 <img width="1916" alt="image" src="https://github.com/JaynPan/snigger-cms/assets/40001097/d4066b0a-562b-430d-b82d-6273e0372037">
 
