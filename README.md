@@ -1,5 +1,8 @@
 # snigger-cms
 
+A CMS for [Snigger](https://apps.apple.com/tw/app/snigger/id6451387892)
+Stack: VueJS, Vuetify, Firebase, vue-router
+
 <img width="1916" alt="image" src="https://github.com/JaynPan/snigger-cms/assets/40001097/d4066b0a-562b-430d-b82d-6273e0372037">
 
 
