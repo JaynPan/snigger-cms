@@ -13,21 +13,31 @@
     "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
+
     "types": [
       "webpack-env",
       "jest"
     ],
+
     "paths": {
       "@/*": [
         "src/*"
       ]
     },
+
     "lib": [
       "esnext",
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+
+    "inlineSources": true,
+
+    // Set `sourceRoot` to  "/" to strip the build path prefix
+    // from generated source code references.
+    // This improves issue grouping in Sentry.
+    "sourceRoot": "/"
   },
   "include": [
     "src/**/*.ts",

@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import * as Sentry from '@sentry/vue';
 
 // Vuetify
 import { createVuetify } from 'vuetify';
@@ -39,5 +40,26 @@ const vuetify = createVuetify({
 });
 
 getAuth(app);
-createApp(App).use(router).use(vuetify).use(ToastPlugin)
+
+const vueApp = createApp(App);
+
+Sentry.init({
+  // vueApp,
+  dsn: 'https://27e49e76ec8bbfe21cb459e344bb3de2@o4505934128939008.ingest.sentry.io/4505934132477952',
+  integrations: [
+    new Sentry.BrowserTracing({
+      // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
+      tracePropagationTargets: ['localhost', /^https:\/\/yourserver\.io\/api/],
+      routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+    }),
+    new Sentry.Replay(),
+  ],
+  // Performance Monitoring
+  tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+  // Session Replay
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1.0,
+});
+
+vueApp.use(router).use(vuetify).use(ToastPlugin)
   .mount('#app');

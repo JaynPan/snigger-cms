@@ -12,6 +12,7 @@ import { Options, Vue } from 'vue-class-component';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
+import * as Sentry from '@sentry/vue';
 
 import { adminUserUid } from '@/config/private';
 
@@ -24,33 +25,34 @@ export default class Login extends Vue {
   private toast = useToast();
 
   googleLogin() {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
+    Sentry.captureException('login failed');
+    // const auth = getAuth();
+    // const provider = new GoogleAuthProvider();
 
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
+    // signInWithPopup(auth, provider)
+    //   .then((result) => {
+    //     // This gives you a Google Access Token. You can use it to access the Google API.
+    //     const credential = GoogleAuthProvider.credentialFromResult(result);
 
-        if (!credential) return;
+    //     if (!credential) return;
 
-        // const token = credential.accessToken;
-        const { user } = result;
+    //     // const token = credential.accessToken;
+    //     const { user } = result;
 
-        if (user && user.uid === adminUserUid) {
-          this.router.push('/uploader');
-        } else {
-          this.toast.error('your are not admin user');
-        }
-      }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const { email } = error.customData;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-      });
+    //     if (user && user.uid === adminUserUid) {
+    //       this.router.push('/uploader');
+    //     } else {
+    //       this.toast.error('your are not admin user');
+    //     }
+    //   }).catch((error) => {
+    //     // Handle Errors here.
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     // The email of the user's account used.
+    //     const { email } = error.customData;
+    //     // The AuthCredential type that was used.
+    //     const credential = GoogleAuthProvider.credentialFromError(error);
+    //   });
   }
 }
 </script>
