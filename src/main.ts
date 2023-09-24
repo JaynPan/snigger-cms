@@ -2,7 +2,6 @@ import { createApp } from 'vue';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
-// Vuetify
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
